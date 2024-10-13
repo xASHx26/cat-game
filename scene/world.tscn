@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpsj4ad68x586"]
+
+[ext_resource type="Script" path="res://scene/world.gd" id="1_4oyfc"]
+[ext_resource type="PackedScene" uid="uid://btevn60wower5" path="res://scene/hazzerd.tscn" id="2_j85eq"]
+[ext_resource type="PackedScene" uid="uid://creladpdln1p6" path="res://scene/cat.tscn" id="3_xsfe6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jaqvl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynugq"]
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_4oyfc")
+hazzerd = ExtResource("2_j85eq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 323)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="cat" parent="." instance=ExtResource("3_xsfe6")]
+position = Vector2(505, 552)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+position = Vector2(560, 621)
+scale = Vector2(1831.74, 78.8314)
+mesh = SubResource("BoxMesh_jaqvl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(560, 621)
+scale = Vector2(91.5869, 3.94157)
+shape = SubResource("RectangleShape2D_ynugq")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
